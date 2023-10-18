@@ -3,22 +3,35 @@ const AddProduct = () => {
     e.preventDefault();
     const photo = e.target.photo.value;
     const name = e.target.name.value;
+    const brandName = e.target.brandName.value;
     const type = e.target.type.value;
-    const price = e.target.price.value;
+    const price = Number(e.target.price.value);
+    const rating = Number(e.target.rating.value);
     const description = e.target.description.value;
-    const rating = e.target.rating.value;
+
     const product = {
       photo,
       name,
+      brandName,
       type,
       price,
-      description,
       rating,
+      description,
     };
     console.log(product);
+
+    fetch("http://localhost:5000/addproduct", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
   return (
-    <div className="bg-[#F4F3F0] p-20 pt-0">
+    <div className="p-20 pt-0">
       <div className="text-3xl font-extrabold text-center pt-5 pb-10">
         Add a Product
       </div>
@@ -26,29 +39,43 @@ const AddProduct = () => {
         <div className="md:flex gap-10">
           <div className="form-control md:w-1/2">
             <label className="label">
-              <span className="label-text">product name</span>
+              <span className="label-text">Product name</span>
             </label>
             <label>
               <input
                 type="text"
                 placeholder="Product Name"
                 name="name"
+                required
                 className="input input-bordered w-full focus:outline-none"
               />
             </label>
           </div>
           <div className="form-control md:w-1/2">
             <label className="label">
-              <span className="label-text">Product Type</span>
+              <span className="label-text">Brand Name</span>
             </label>
-            <label>
-              <input
-                type="text"
-                placeholder="Product Type"
-                name="type"
-                className="input input-bordered w-full focus:outline-none"
-              />
-            </label>
+            <select
+              defaultValue={"- Select Brand Name -"}
+              name="brandName"
+              className="select select-bordered focus:outline-none w-full "
+            >
+              <option disabled value={"- Select Brand Name -"}>
+                - Select Brand Name -
+              </option>
+              <option value={"Akij Food & Beverage Ltd"}>
+                Akij Food & Beverage Ltd
+              </option>
+              <option value={"Pran Foods"}>Pran Foods</option>
+              <option value={"Pepsico"}>Pepsico</option>
+              <option value={"The Cocacola Company"}>
+                The Cocacola Company
+              </option>
+              <option value={"Ahmed Food Products Ltd"}>
+                Ahmed Food Products Ltd
+              </option>
+              <option value={"Igloo bd"}>Igloo bd</option>
+            </select>
           </div>
         </div>
         <div className="md:flex gap-10">
@@ -61,19 +88,21 @@ const AddProduct = () => {
                 type="text"
                 placeholder="Price"
                 name="price"
+                required
                 className="input input-bordered w-full focus:outline-none"
               />
             </label>
           </div>
           <div className="form-control md:w-1/2">
             <label className="label">
-              <span className="label-text">Photo URL</span>
+              <span className="label-text">Product Type</span>
             </label>
             <label>
               <input
-                name="photo"
                 type="text"
-                placeholder="Photo URL"
+                required
+                placeholder="Product Type"
+                name="type"
                 className="input input-bordered w-full focus:outline-none"
               />
             </label>
@@ -82,18 +111,32 @@ const AddProduct = () => {
         <div className="md:flex gap-10">
           <div className="form-control md:w-1/2">
             <label className="label">
+              <span className="label-text">Photo URL</span>
+            </label>
+            <label>
+              <input
+                name="photo"
+                type="text"
+                required
+                placeholder="Photo URL"
+                className="input input-bordered w-full focus:outline-none"
+              />
+            </label>
+          </div>
+          <div className="form-control md:w-1/2">
+            <label className="label">
               <span className="label-text">Rating</span>
             </label>
             <label>
               <input
                 type="text"
+                required
                 placeholder="Rating"
                 name="rating"
                 className="input input-bordered w-full focus:outline-none"
               />
             </label>
           </div>
-          <div className="form-control md:w-1/2"></div>
         </div>
         <div className="md:flex gap-10">
           <div className="form-control md:w-full ">
@@ -104,6 +147,7 @@ const AddProduct = () => {
               className="textarea textarea-bordered h-28 resize-none focus:outline-none"
               name="description"
               type="text"
+              required
               placeholder="Description"
             ></textarea>
           </div>
