@@ -1,8 +1,23 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthProvider";
+import { AiFillGoogleCircle } from "react-icons/ai";
 
 const Login = () => {
-  const handleLogin = () => {
-    console.log("login form submitted");
+  const { logInUser, googleSignIn } = useContext(AuthContext);
+  const handleLoginWithGoogle = () => {
+    googleSignIn()
+      .then((res) => res.user)
+      .catch((error) => console.log(error.message));
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    logInUser(email, password)
+      .then((res) => console.log(res.user))
+      .catch((error) => console.log(error.message));
   };
   return (
     <div className="hero min-h-screen bg-base-200">
@@ -21,7 +36,7 @@ const Login = () => {
                   type="email"
                   name="email"
                   placeholder="email"
-                  className="input input-bordered"
+                  className="input input-bordered focus:outline-none"
                 />
               </div>
               <div className="form-control">
@@ -32,7 +47,7 @@ const Login = () => {
                   type="password"
                   name="password"
                   placeholder="password"
-                  className="input input-bordered"
+                  className="input input-bordered focus:outline-none"
                 />
               </div>
               <label className="label">
@@ -41,16 +56,23 @@ const Login = () => {
                 </a>
               </label>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
+                <button className="btn btn-neutral">Login</button>
               </div>
             </form>
             <p>
               Dont have account? Please{" "}
-              <Link className="text-green-700" to="/register">
+              <Link className="text-green-700 font-bold" to="/register">
                 register
               </Link>
             </p>
-            <p>sign in with google</p>
+            <hr className="w-[60%] mx-auto border" />
+            <p className="text-center">or</p>
+            <div
+              onClick={handleLoginWithGoogle}
+              className="mx-auto text-4xl cursor-pointer"
+            >
+              <AiFillGoogleCircle />
+            </div>
           </div>
         </div>
       </div>
