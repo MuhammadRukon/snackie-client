@@ -28,7 +28,11 @@ const AddProduct = () => {
       body: JSON.stringify(product),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        console.log(data);
+        // add success toast
+        e.target.reset();
+      });
   };
   return (
     <div className="p-20 pt-0">

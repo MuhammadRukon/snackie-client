@@ -101,9 +101,12 @@ const Products = () => {
         </Slider>
       </div>
       {loadedDatas.length ? (
-        loadedDatas.map((data) => <Product key={data._id} data={data} />)
+        <div className="grid grid-cols-4 gap-5 mt-10">
+          {loadedDatas.length &&
+            loadedDatas.map((data) => <Product key={data._id} data={data} />)}
+        </div>
       ) : (
-        <h1>no data found</h1>
+        <h1>No data found</h1>
       )}
     </>
   );
