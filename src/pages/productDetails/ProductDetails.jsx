@@ -34,7 +34,7 @@ const ProductDetails = () => {
       .catch((error) => console.log(error.message));
   };
   return (
-    <div className="hero h-[70vh] bg-gray-100 ">
+    <div className="hero xl:h-[70vh] bg-gray-100 ">
       <div className="hero-content w-full justify-start gap-20 flex-col lg:flex-row">
         <img src={data.photo} className="max-w-sm rounded-lg" />
         <div className="space-y-3 ">

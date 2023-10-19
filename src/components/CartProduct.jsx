@@ -21,12 +21,12 @@ const CartProduct = ({ data, handleCartUpdate }) => {
       .catch((error) => console.log(error.message));
   };
   return (
-    <div className="hero w-[50vw] px-10 bg-gray-100 mb-8">
+    <div className="hero xl:w-[60vw] 2xl:w-[50vw] px-5 lg:px-10 bg-gray-100 mb-8">
       <div className="hero-content w-full justify-start gap-20 flex-col lg:flex-row">
         <img src={data.photo} className="max-w-xs h-[200px] rounded-lg" />
         <div className="space-y-2 ">
           <h1 className="text-3xl font-bold mb-2">Product Name: {data.name}</h1>
-          <p className="font-semibold text-lg  inline-block text-center">
+          <p className="font-semibold text-lg  inline-block lg:text-center">
             Brand Name:{" "}
             <span className="bg-gray-300 px-2 rounded-md">
               {data.brandName}

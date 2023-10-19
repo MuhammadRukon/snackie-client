@@ -91,7 +91,10 @@ const Products = () => {
         <Slider {...settings} prevArrow={<GrPrevious />} nextArrow={<GrNext />}>
           {loadedDatas.length
             ? brand[0]?.advertise?.map((data, index) => (
-                <div key={index} className="overflow-hidden h-[700px]">
+                <div
+                  key={index}
+                  className="overflow-hidden h-[200px] xl:h-[700px]"
+                >
                   <img
                     src={data}
                     alt=""
@@ -103,14 +106,15 @@ const Products = () => {
         </Slider>
       </div>
       {loadedDatas.length ? (
-        <div className="grid grid-cols-4 gap-5 mt-10">
+        <div className="grid md:grid-cols-2 xl:grid-cols-4  gap-5 px-10 2xl:px-0 mt-10">
           {loadedDatas.length &&
             loadedDatas.map((data) => <Product key={data._id} data={data} />)}
         </div>
       ) : (
         <div className="h-[70vh] w-full flex flex-col gap-10 items-center justify-center">
           <h2 className="text-6xl">
-            No data found :( <br />
+            No data found 😓
+            <br />
           </h2>
           <h2 className="text-lg">
             Add a product of this brand to see <strong>advertisements</strong>{" "}

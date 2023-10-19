@@ -26,7 +26,10 @@ const MyCart = () => {
     }
   }
   return (
-    <div>
+    <div className="px-10 lg:px-0">
+      <h2 className="text-center mt-10 mb-10 lg:mb-20 lg:mt-20 font-bold text-4xl md:text-5xl">
+        My Cart
+      </h2>
       {cartProducts.length ? (
         cartProducts.map((product) => (
           <CartProduct
@@ -36,7 +39,7 @@ const MyCart = () => {
           />
         ))
       ) : (
-        <div className="h-[70vh] w-full flex flex-col gap-5 items-center justify-center">
+        <div className=" h-[70vh] w-full flex flex-col gap-5 items-center justify-center">
           <h2 className="text-3xl font-bold">Cart Empty!</h2>
           <Link className="btn btn-neutral" to="/">
             Add Product
