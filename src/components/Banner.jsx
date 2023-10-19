@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
+
 const Banner = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div
       className="hero"
@@ -7,15 +12,18 @@ const Banner = () => {
       }}
     >
       <div className="hero-overlay bg-opacity-60"></div>
-      <div className="hero-content py-40 text-center text-neutral-content">
-        <div className="max-w-md">
-          <h1 className="mb-5 text-6xl font-bold">Hello there</h1>
-          <p className="mb-5 text-lg">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+      <div className="hero-content py-48 text-center text-neutral-content">
+        <div className="">
+          <h1 className="mb-5 text-6xl font-bold ">Satisfy Cravings</h1>
+          <p className="mb-5 text-lg w-[70%] mx-auto">
+            Discover a world of flavors and refreshment on our food and beverage
+            website, where every sip and bite is a delightful experience.
           </p>
-          <button className="btn btn-neutral">Get Started</button>
+          {!user && (
+            <Link to="/register" className="btn btn-neutral">
+              Register Now
+            </Link>
+          )}
         </div>
       </div>
     </div>

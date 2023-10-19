@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Product = ({ data }) => {
   return (
-    <div className="card  bg-base-100 shadow-xl">
+    <div className="card  bg-base-100 drop-shadow-[0px_0px_10px_rgba(0,0,0,0.25)]">
       <figure className="px-5 pt-5 h-[350px]">
         <img
           src={data.photo}
@@ -18,7 +18,9 @@ const Product = ({ data }) => {
           <p className="bg-gray-300 px-2 rounded-md font-bold">
             {data.brandName}
           </p>
-          <p className="bg-gray-300 px-2 rounded-md">{data.type}</p>
+          <p className="bg-gray-300 px-2 inline-block rounded-md">
+            {data.type}
+          </p>
         </div>
         <div className="space-y-1">
           <p className="font-bold">

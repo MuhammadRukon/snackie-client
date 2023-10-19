@@ -3,11 +3,16 @@ import BrandCard from "./BrandCard";
 
 const Brands = ({ datas }) => {
   return (
-    <div className="grid gap-14 mt-20 md:grid-cols-3">
-      {datas.map((data) => (
-        <BrandCard key={data._id} data={data} />
-      ))}
-    </div>
+    <>
+      <h2 className="text-center mt-20 font-bold text-4xl md:text-5xl">
+        Our Brands
+      </h2>
+      <div className="grid gap-14 px-10 lg:px-0 mt-20 lg:grid-cols-3">
+        {datas.map((data) => (
+          <BrandCard key={data._id} data={data} />
+        ))}
+      </div>
+    </>
   );
 };
 Brands.propTypes = {

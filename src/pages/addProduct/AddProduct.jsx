@@ -8,7 +8,10 @@ const AddProduct = () => {
     const price = Number(e.target.price.value);
     const rating = Number(e.target.rating.value);
     const description = e.target.description.value;
-
+    if (brandName === "- Select Brand Name -") {
+      console.log("please change brand");
+      return;
+    }
     const product = {
       photo,
       name,
@@ -30,7 +33,8 @@ const AddProduct = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        // add success toast
+        // add a toast
+        console.log("add a success toast");
         e.target.reset();
       });
   };
@@ -60,6 +64,7 @@ const AddProduct = () => {
               <span className="label-text">Brand Name</span>
             </label>
             <select
+              required
               defaultValue={"- Select Brand Name -"}
               name="brandName"
               className="select select-bordered focus:outline-none w-full "

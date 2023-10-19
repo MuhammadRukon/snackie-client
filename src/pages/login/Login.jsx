@@ -1,31 +1,81 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import { AiFillGoogleCircle } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 const Login = () => {
-  const { logInUser, googleSignIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { logInUser, googleSignIn, registeredUsers, setEffect } =
+    useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState("");
+  // login with google
   const handleLoginWithGoogle = () => {
+    setErrorMessage("");
     googleSignIn()
-      .then((res) => res.user)
-      .catch((error) => console.log(error.message));
+      .then((res) => {
+        const email = res.user.email;
+        setEffect((prevVal) => !prevVal);
+        const exists = registeredUsers.find((user) => user.email === email);
+        toast.success("Successfully Signed In", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        if (exists) {
+          navigate(location?.state ? location.state : "/");
+          return;
+        }
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data))
+          .catch((error) => console.log(error.message));
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((error) => setErrorMessage(error.message));
   };
-
+  // login with email and pass
   const handleLogin = (e) => {
     e.preventDefault();
+    setErrorMessage("");
     const email = e.target.email.value;
     const password = e.target.password.value;
     logInUser(email, password)
-      .then((res) => console.log(res.user))
-      .catch((error) => console.log(error.message));
+      .then((res) => {
+        console.log(res.user);
+        toast.success("Successfully Signed In", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((error) => setErrorMessage(error.message));
   };
   return (
-    <div className="hero min-h-screen bg-base-200">
-      <div className="hero-content flex-col">
+    <div className="hero py-10 bg-base-200">
+      <div className="hero-content  flex-col">
         <div className="text-center">
           <h1 className="text-5xl font-bold">Login now!</h1>
         </div>
-        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
           <div className="card-body">
             <form onSubmit={handleLogin}>
               <div className="form-control">
@@ -55,11 +105,12 @@ const Login = () => {
                   Forgot password?
                 </a>
               </label>
+              <p className="text-red-700 ml-1 text-sm">{errorMessage}</p>
               <div className="form-control mt-6">
                 <button className="btn btn-neutral">Login</button>
               </div>
             </form>
-            <p>
+            <p className="text-center">
               Dont have account? Please{" "}
               <Link className="text-green-700 font-bold" to="/register">
                 register

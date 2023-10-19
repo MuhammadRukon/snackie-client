@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
 
@@ -14,7 +15,19 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [registeredUsers, setRegisteredUsers] = useState(null);
+  const [effect, setEffect] = useState(false);
 
+  // set registered user
+  useEffect(() => {
+    const fetchUsers = () => {
+      fetch(`http://localhost:5000/users`)
+        .then((res) => res.json())
+        .then((data) => setRegisteredUsers(data))
+        .catch((error) => console.log(error.message));
+    };
+    fetchUsers();
+  }, [effect]);
   // register
   const createUser = (email, password) => {
     setLoading(true);
@@ -25,8 +38,16 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
+  // update profile
+  const updateUser = (name, photo) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
+  };
   // log in with google
   const googleProvider = new GoogleAuthProvider();
+
   const googleSignIn = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
@@ -34,20 +55,20 @@ const AuthProvider = ({ children }) => {
 
   // log out
   const logOutUser = () => {
+    setLoading(true);
     return signOut(auth);
   };
 
   // on auth state changed
   useEffect(() => {
-    const unsubscribe = () => {
-      onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);
-        setLoading(false);
-      });
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return () => {
+      unSubscribe();
     };
-    return () => unsubscribe();
   }, []);
-
   const authInfo = {
     createUser,
     loading,
@@ -55,6 +76,9 @@ const AuthProvider = ({ children }) => {
     logOutUser,
     logInUser,
     googleSignIn,
+    updateUser,
+    registeredUsers,
+    setEffect,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

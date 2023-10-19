@@ -89,15 +89,17 @@ const Products = () => {
     <>
       <div className="px-10 2xl:px-0">
         <Slider {...settings} prevArrow={<GrPrevious />} nextArrow={<GrNext />}>
-          {loadedDatas.length ? (
-            brand[0]?.advertise?.map((data, index) => (
-              <div key={index} className="overflow-hidden h-[700px]">
-                <img src={data} alt="" className="w-full h-full object-cover" />
-              </div>
-            ))
-          ) : (
-            <h1>no data found</h1>
-          )}
+          {loadedDatas.length
+            ? brand[0]?.advertise?.map((data, index) => (
+                <div key={index} className="overflow-hidden h-[700px]">
+                  <img
+                    src={data}
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))
+            : ""}
         </Slider>
       </div>
       {loadedDatas.length ? (
@@ -106,7 +108,15 @@ const Products = () => {
             loadedDatas.map((data) => <Product key={data._id} data={data} />)}
         </div>
       ) : (
-        <h1>No data found</h1>
+        <div className="h-[70vh] w-full flex flex-col gap-10 items-center justify-center">
+          <h2 className="text-6xl">
+            No data found :( <br />
+          </h2>
+          <h2 className="text-lg">
+            Add a product of this brand to see <strong>advertisements</strong>{" "}
+            and <strong>products</strong>.
+          </h2>
+        </div>
       )}
     </>
   );

@@ -39,15 +39,22 @@ const Navbar = () => {
         </div>
         <Link
           to="/"
-          className="btn btn-ghost normal-case text-3xl italic font-bold"
+          className="flex items-center normal-case text-3xl italic font-bold"
         >
-          Snackie
+          <div className="w-[40px]">
+            <img
+              className=""
+              src="https://i.ibb.co/4sqQkb2/pngegg.png"
+              alt=""
+            />
+          </div>
+          <span className="hidden md:inline-block">Snackie</span>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 gap-3">{links}</ul>
       </div>
-      <div className="navbar-end gap-2">
+      <div className="navbar-end w-full md:w-[50%] gap-2">
         <span className=" text-lg">{user ? user.displayName : "user"}</span>
         <div className=" w-[45px] h-[45px] rounded-full overflow-hidden">
           <img
@@ -55,6 +62,7 @@ const Navbar = () => {
               user ? user.photoURL : "https://i.ibb.co/n7d6gxh/pngwing-com.png"
             }
             alt=""
+            className="object-cover w-full h-full"
           />
         </div>
         {user ? (

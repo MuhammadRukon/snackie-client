@@ -8,12 +8,14 @@ import Login from "../pages/login/Login";
 import Products from "../pages/products/Products";
 import ProductDetails from "../pages/productDetails/ProductDetails";
 import UpdateProduct from "../pages/updateProduct/UpdateProduct";
+import Error from "../pages/error/Error";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement: <h1>error! oopsie</h1>,
+    errorElement: <Error />,
     children: [
       {
         path: "/",
@@ -22,7 +24,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/addproduct",
-        element: <AddProduct />,
+        element: (
+          <PrivateRoute>
+            <AddProduct />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/products/:brandName",
@@ -32,7 +38,12 @@ export const router = createBrowserRouter([
       },
       {
         path: "/mycart",
-        element: <MyCart />,
+        element: (
+          <PrivateRoute>
+            <MyCart />
+          </PrivateRoute>
+        ),
+        loader: () => fetch("http://localhost:5000/allproducts"),
       },
       {
         path: "/register",
@@ -44,13 +55,21 @@ export const router = createBrowserRouter([
       },
       {
         path: "/details/:id",
-        element: <ProductDetails />,
+        element: (
+          <PrivateRoute>
+            <ProductDetails />
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/details/${params.id}`),
       },
       {
         path: "/update/:id",
-        element: <UpdateProduct />,
+        element: (
+          <PrivateRoute>
+            <UpdateProduct />
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/details/${params.id}`),
       },
