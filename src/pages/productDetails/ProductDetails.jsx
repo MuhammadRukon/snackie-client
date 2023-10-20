@@ -1,15 +1,45 @@
 import { useLoaderData } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../provider/AuthProvider";
 const ProductDetails = () => {
   const { user } = useContext(AuthContext);
-
+  const [cartItems, setCartItems] = useState(null);
   const loadedData = useLoaderData();
+  const [effect, setEffect] = useState(false);
   const data = loadedData[0];
+  useEffect(() => {
+    const fetchData = () => {
+      fetch(`http://localhost:5000/users/${user.email}`)
+        .then((res) => res.json())
+        .then((data) => setCartItems(data))
+        .catch((error) => console.log(error.message));
+    };
+    fetchData();
+  }, [effect, user.email]);
+
   const handleAddToCart = () => {
+    setEffect(!effect);
+    for (const item of cartItems) {
+      const productIds = item.productId;
+
+      const exists = productIds.find((id) => id === data._id);
+      if (exists) {
+        toast.error("already added", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        return;
+      }
+    }
     fetch(`http://localhost:5000/cart/${user.email}`, {
       method: "PUT",
       headers: {
@@ -65,7 +95,6 @@ const ProductDetails = () => {
           </button>
         </div>
       </div>
-      {/* <ToastContainer /> */}
     </div>
   );
 };

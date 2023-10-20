@@ -31,9 +31,9 @@ const MyCart = () => {
         My Cart
       </h2>
       {cartProducts.length ? (
-        cartProducts.map((product) => (
+        cartProducts.map((product, index) => (
           <CartProduct
-            key={product._id}
+            key={index}
             handleCartUpdate={setEffect}
             data={product}
           />
