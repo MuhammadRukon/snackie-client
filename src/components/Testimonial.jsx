@@ -43,7 +43,7 @@ const Testimonial = () => {
           <div className="absolute flex justify-between transform -translate-y-1/2 left-3 right-3 md:left-16 md:right-16 top-1/2">
             <a
               href="#slide4"
-              className={`btn btn-circle bg-white border-neutral ${
+              className={`btn btn-circle  border-neutral ${
                 theme === "light" ? "bg-white" : "bg-gray-700"
               }`}
             >
@@ -51,7 +51,7 @@ const Testimonial = () => {
             </a>
             <a
               href="#slide2"
-              className={`btn btn-circle bg-white border-neutral ${
+              className={`btn btn-circle  border-neutral ${
                 theme === "light" ? "bg-white" : "bg-gray-700"
               }`}
             >
@@ -92,7 +92,7 @@ const Testimonial = () => {
           <div className="absolute flex justify-between transform -translate-y-1/2 left-3 right-3 md:left-16 md:right-16 top-1/2">
             <a
               href="#slide1"
-              className={`btn btn-circle bg-white border-neutral ${
+              className={`btn btn-circle  border-neutral ${
                 theme === "light" ? "bg-white" : "bg-gray-700"
               }`}
             >
@@ -100,7 +100,7 @@ const Testimonial = () => {
             </a>
             <a
               href="#slide3"
-              className={`btn btn-circle bg-white border-neutral ${
+              className={`btn btn-circle  border-neutral ${
                 theme === "light" ? "bg-white" : "bg-gray-700"
               }`}
             >
@@ -109,10 +109,6 @@ const Testimonial = () => {
           </div>
         </div>
         <div id="slide3" className="carousel-item relative w-full py-20">
-          className=
-          {`btn btn-circle bg-white border-neutral ${
-            theme === "light" ? "bg-white" : "bg-gray-700"
-          }`}
           <div
             className={`card flex-col lg:flex-row w-[80%] md:w-[60%] mx-auto items-center gap-4 md:gap-8 card-side p-8 ${
               theme === "light" ? "bg-white" : "bg-gray-700"
@@ -145,15 +141,15 @@ const Testimonial = () => {
           <div className="absolute flex justify-between transform -translate-y-1/2 left-3 right-3 md:left-16 md:right-16 top-1/2">
             <a
               href="#slide2"
-              className={`btn btn-circle bg-white border-neutral ${
-                theme === "light" ? "bg-white" : "bg-gray-700"
+              className={`btn btn-circle  border-neutral ${
+                theme == "light" ? "bg-white" : "bg-gray-700"
               }`}
             >
               ❮
             </a>
             <a
               href="#slide4"
-              className={`btn btn-circle bg-white border-neutral ${
+              className={`btn btn-circle  border-neutral ${
                 theme === "light" ? "bg-white" : "bg-gray-700"
               }`}
             >
@@ -194,7 +190,7 @@ const Testimonial = () => {
           <div className="absolute flex justify-between transform -translate-y-1/2 left-3 right-3 md:left-16 md:right-16 top-1/2">
             <a
               href="#slide3"
-              className={`btn btn-circle bg-white border-neutral ${
+              className={`btn btn-circle  border-neutral ${
                 theme === "light" ? "bg-white" : "bg-gray-700"
               }`}
             >
@@ -202,7 +198,7 @@ const Testimonial = () => {
             </a>
             <a
               href="#slide1"
-              className={`btn btn-circle bg-white border-neutral ${
+              className={`btn btn-circle  border-neutral ${
                 theme === "light" ? "bg-white" : "bg-gray-700"
               }`}
             >
