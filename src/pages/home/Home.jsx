@@ -6,6 +6,7 @@ import GetInTouch from "../../components/GetInTouch";
 
 const Home = () => {
   const loadedDatas = useLoaderData();
+
   return (
     <>
       <Banner />

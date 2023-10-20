@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
@@ -10,6 +10,17 @@ const Navbar = () => {
       .then(() => console.log("logged out succesfully with toast"))
       .catch((error) => console.log(error.message));
   };
+  const [toggle, setToggle] = useState(true);
+  let theme;
+  if (toggle) {
+    theme = "light";
+  } else {
+    theme = "dark";
+  }
+
+  useEffect(() => {
+    document.querySelector("html").setAttribute("data-theme", theme);
+  }, [theme]);
   const links = (
     <>
       <li>
@@ -74,6 +85,15 @@ const Navbar = () => {
             login
           </Link>
         )}
+        <button
+          title={theme === "light" ? "switch to dark" : "switch to light"}
+          onClick={() => {
+            setToggle(!toggle);
+          }}
+          className="text-4xl mb-1"
+        >
+          {theme === "light" ? "🌚" : "🌞"}
+        </button>
       </div>
     </div>
   );
