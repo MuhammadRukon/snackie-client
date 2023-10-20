@@ -52,6 +52,14 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
+  // thme
+  const [toggle, setToggle] = useState(true);
+  let theme;
+  if (toggle) {
+    theme = "light";
+  } else {
+    theme = "dark";
+  }
 
   // log out
   const logOutUser = () => {
@@ -79,6 +87,9 @@ const AuthProvider = ({ children }) => {
     updateUser,
     registeredUsers,
     setEffect,
+    theme,
+    setToggle,
+    toggle,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

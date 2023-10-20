@@ -1,22 +1,16 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { auth } from "../firebase/firebase.config";
 const Navbar = () => {
-  const { user, logOutUser } = useContext(AuthContext);
+  const { user, logOutUser, theme, setToggle, toggle } =
+    useContext(AuthContext);
   const handleLogout = () => {
     logOutUser(auth)
       .then(() => console.log("logged out succesfully with toast"))
       .catch((error) => console.log(error.message));
   };
-  const [toggle, setToggle] = useState(true);
-  let theme;
-  if (toggle) {
-    theme = "light";
-  } else {
-    theme = "dark";
-  }
 
   useEffect(() => {
     document.querySelector("html").setAttribute("data-theme", theme);
