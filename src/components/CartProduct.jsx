@@ -6,7 +6,7 @@ import { AuthContext } from "../provider/AuthProvider";
 const CartProduct = ({ data, handleCartUpdate }) => {
   const { user } = useContext(AuthContext);
   const handleDelete = () => {
-    fetch(`http://localhost:5000/cart/delete/${user.email}`, {
+    fetch(`https://brand-server-iota.vercel.app/cart/delete/${user.email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

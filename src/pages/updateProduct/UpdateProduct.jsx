@@ -13,7 +13,7 @@ const UpdateProduct = () => {
     const price = Number(e.target.price.value);
     const rating = Number(e.target.rating.value);
     const updateInfo = { photo, name, rating, price, type, brandName };
-    fetch(`http://localhost:5000/products/${id}`, {
+    fetch(`https://brand-server-iota.vercel.app/products/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

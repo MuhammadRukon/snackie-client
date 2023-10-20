@@ -36,7 +36,7 @@ const Register = () => {
         updateUser(name, photo)
           .then(() => {
             console.log("profile Updated");
-            fetch("http://localhost:5000/users", {
+            fetch("https://brand-server-iota.vercel.app/users", {
               method: "POST",
               headers: {
                 "content-type": "application/json",
@@ -76,7 +76,7 @@ const Register = () => {
         if (exists) {
           return;
         }
-        fetch("http://localhost:5000/users", {
+        fetch("https://brand-server-iota.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",

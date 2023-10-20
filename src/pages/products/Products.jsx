@@ -76,7 +76,7 @@ const Products = () => {
 
   useEffect(() => {
     const fetchBrands = async () => {
-      fetch(`http://localhost:5000/brands/${brandName}`)
+      fetch(`https://brand-server-iota.vercel.app/brands/${brandName}`)
         .then((res) => res.json())
         .then((data) => {
           setBrand(data);

@@ -32,7 +32,7 @@ const Login = () => {
           navigate(location?.state ? location.state : "/");
           return;
         }
-        fetch("http://localhost:5000/users", {
+        fetch("https://brand-server-iota.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",

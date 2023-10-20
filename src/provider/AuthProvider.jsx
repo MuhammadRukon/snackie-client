@@ -21,7 +21,7 @@ const AuthProvider = ({ children }) => {
   // set registered user
   useEffect(() => {
     const fetchUsers = () => {
-      fetch(`http://localhost:5000/users`)
+      fetch(`https://brand-server-iota.vercel.app/users`)
         .then((res) => res.json())
         .then((data) => setRegisteredUsers(data))
         .catch((error) => console.log(error.message));

@@ -5,26 +5,25 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../provider/AuthProvider";
 const ProductDetails = () => {
-  const { user } = useContext(AuthContext);
   const [cartItems, setCartItems] = useState(null);
+  const { user } = useContext(AuthContext);
   const loadedData = useLoaderData();
-  const [effect, setEffect] = useState(false);
-  const data = loadedData[0];
+
   useEffect(() => {
     const fetchData = () => {
-      fetch(`http://localhost:5000/users/${user.email}`)
+      fetch(`https://brand-server-iota.vercel.app/users/${user.email}`)
         .then((res) => res.json())
         .then((data) => setCartItems(data))
         .catch((error) => console.log(error.message));
     };
     fetchData();
-  }, [effect, user.email]);
+  }, []);
+
+  const data = loadedData[0];
 
   const handleAddToCart = () => {
-    setEffect(!effect);
     for (const item of cartItems) {
       const productIds = item.productId;
-
       const exists = productIds.find((id) => id === data._id);
       if (exists) {
         toast.error("already added", {
@@ -38,30 +37,36 @@ const ProductDetails = () => {
           theme: "light",
         });
         return;
+      } else {
+        fetch(`https://brand-server-iota.vercel.app/cart/${user.email}`, {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ productIds: data._id }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            fetch(`https://brand-server-iota.vercel.app/users/${user.email}`)
+              .then((res) => res.json())
+              .then((data) => setCartItems(data))
+              .catch((error) => console.log(error.message));
+            toast.success("Successfully added to cart", {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          })
+
+          .catch((error) => console.log(error.message));
       }
     }
-    fetch(`http://localhost:5000/cart/${user.email}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ productIds: data._id }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        toast.success("Successfully added to cart", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-      })
-      .catch((error) => console.log(error.message));
   };
   return (
     <div className="hero xl:h-[70vh] bg-gray-100">

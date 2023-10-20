@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch("http://localhost:5000/brands"),
+        loader: () => fetch("https://brand-server-iota.vercel.app/brands"),
       },
       {
         path: "/addproduct",
@@ -34,7 +34,9 @@ export const router = createBrowserRouter([
         path: "/products/:brandName",
         element: <Products />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/products/${params.brandName}`),
+          fetch(
+            `https://brand-server-iota.vercel.app/products/${params.brandName}`
+          ),
       },
       {
         path: "/mycart",
@@ -43,7 +45,7 @@ export const router = createBrowserRouter([
             <MyCart />
           </PrivateRoute>
         ),
-        loader: () => fetch("http://localhost:5000/allproducts"),
+        loader: () => fetch("https://brand-server-iota.vercel.app/allproducts"),
       },
       {
         path: "/register",
@@ -61,7 +63,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/details/${params.id}`),
+          fetch(`https://brand-server-iota.vercel.app/details/${params.id}`),
       },
       {
         path: "/update/:id",
@@ -71,7 +73,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/details/${params.id}`),
+          fetch(`https://brand-server-iota.vercel.app/details/${params.id}`),
       },
     ],
   },
