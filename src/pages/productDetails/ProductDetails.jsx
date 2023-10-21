@@ -1,9 +1,10 @@
 import { useLoaderData } from "react-router-dom";
-import { AiFillStar } from "react-icons/ai";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactStars from "react-rating-stars-component";
 import { AuthContext } from "../../provider/AuthProvider";
+
 const ProductDetails = () => {
   const [cartItems, setCartItems] = useState(null);
   const { user } = useContext(AuthContext);
@@ -88,10 +89,14 @@ const ProductDetails = () => {
           </p>
 
           <div className="flex items-center mt-2 font-bold">
-            <p>Rating: {data.rating}</p>
-            <div className="text-yellow-500">
-              <AiFillStar />
-            </div>
+            <ReactStars
+              count={5}
+              size={24}
+              edit={false}
+              isHalf={true}
+              value={data.rating}
+              activeColor="#ffd700"
+            />
           </div>
 
           <p className="pb-2 italic">{data.description}</p>

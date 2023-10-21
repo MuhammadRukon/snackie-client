@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import ReactStars from "react-rating-stars-component";
 
 const Product = ({ data }) => {
   return (
@@ -29,11 +29,14 @@ const Product = ({ data }) => {
           </p>
           <div>
             <div className="flex items-center font-bold">
-              <p>{data.rating}</p>
-
-              <div className="text-yellow-500">
-                <AiFillStar />
-              </div>
+              <ReactStars
+                count={5}
+                size={24}
+                edit={false}
+                isHalf={true}
+                value={data.rating}
+                activeColor="#ffd700"
+              />
             </div>
           </div>
         </div>

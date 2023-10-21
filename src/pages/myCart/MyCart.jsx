@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import CartProduct from "../../components/CartProduct";
+import Loading from "../../components/Loading";
 
 const MyCart = () => {
   const cartProducts = [];
@@ -9,7 +10,7 @@ const MyCart = () => {
 
   const loadedData = useLoaderData();
   const [cartProductId, setCartProductId] = useState(null);
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   useEffect(() => {
     const fetchData = () => {
       fetch(`https://brand-server-iota.vercel.app/users/${user.email}`)
@@ -30,7 +31,9 @@ const MyCart = () => {
       <h2 className="text-center mt-10 mb-10 lg:mb-20 lg:mt-20 font-bold text-4xl md:text-5xl">
         My Cart
       </h2>
-      {cartProducts.length ? (
+      {loading ? (
+        <Loading />
+      ) : cartProducts.length ? (
         cartProducts.map((product, index) => (
           <CartProduct
             key={index}
