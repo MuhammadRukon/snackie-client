@@ -1,11 +1,38 @@
-live link: https://brand-shop-48c61.web.app/
+3. ### Snackie
 
-Feature 1: User can login and register using google or email password.
+A MERN stack based website for food and beverages. Explore a tailored shopping experience with the following key features:
 
-Feature 2: after logging in, user can get access to routes/pages like "my cart", "add product", "product details".
+**Distinctive Homepage:**
+- Engaging navbar, banner with video, and footer.
+- Showcase diverse brand categories with images and names.
+- Additional sections for an enriched browsing experience.
 
-Feature 3: User can add a product then see the product in the home pages relevant brand card after clicking it.
+**Dynamic Navbar:**
+- Personalized user details and logout button upon login.
+- Responsive design for an optimal experience across devices.
 
-Feature 4: User can add update a product, add and remove a product from cart, and after re-login, the cart history is retrieved from database which is very convenient.
+**Effortless Product Addition:**
+- Private route for adding products with a user-friendly form.
+- Dynamic categorization based on chosen brand category.
 
-Feature 5: User can toggle between dark and light theme, use the site both via phone and desktop for it being responsive for desktop, tablet and mobile.
+**Brand-Focused Pages:**
+- Clicking a brand redirects to a dedicated page with ads and products.
+- Intuitive display of product details.
+- Update and Details buttons for seamless interaction.
+
+**Detailed Product Information:**
+- Private route for product details with personalized information.
+- Add to Cart functionality for a convenient shopping experience.
+
+**Secure Shopping Cart:**
+- Private route to view and manage added products.
+
+**User Authentication:**
+- Robust email and password-based authentication.
+- Error handling for registration and login with Firebase alerts/toasts.
+
+**404 Page:**
+- Customized not-found page for a seamless navigation experience.
+
+**Live Link:**
+[Snackie](https://brand-shop-48c61.web.app)
