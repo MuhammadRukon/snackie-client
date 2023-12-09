@@ -34,6 +34,8 @@ A MERN stack based website for food and beverages. Explore a tailored shopping e
 **404 Page:**
 - Customized not-found page for a seamless navigation experience.
 
-**Tech-stack:** React js, express js, firebase, mongodb.
+**Tech-stack:** 
+React js, express js, firebase, mongodb.
+
 **Live Link:**
 [Snackie](https://brand-shop-48c61.web.app)
