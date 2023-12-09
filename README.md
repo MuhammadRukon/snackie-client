@@ -1,4 +1,4 @@
-3. ### Snackie
+### Snackie
 
 A MERN stack based website for food and beverages. Explore a tailored shopping experience with the following key features:
 
